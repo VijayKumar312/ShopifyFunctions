@@ -1,0 +1,40 @@
+query RunInput {
+  shop {
+    metafield(key: "pincodes1", namespace: "global") {
+      type
+      value
+    }
+  }
+  cart {
+    lines {
+      id
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            id
+          }
+        }
+      }
+    }
+    attribute(key: "user_pincode") {
+      key
+      value
+    }
+    cost {
+      totalAmount {
+        amount
+      }
+    }
+    deliveryGroups {
+      deliveryAddress {
+        provinceCode
+        zip
+      }
+      deliveryOptions {
+        handle
+        title
+      }
+    }
+  }
+}

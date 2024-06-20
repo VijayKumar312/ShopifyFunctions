@@ -1,0 +1,39 @@
+query RunInput {
+  cart {
+    lines {
+      id
+      quantity
+      cost {
+        amountPerQuantity {
+          amount
+          currencyCode
+        }
+      }
+      # Access the cart line attribute to decide if a warranty should be added
+      warrantyAdded: attribute(key: "Warranty Added") {
+        value
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          title
+          product {
+            # Access the metafield value to determine the cost of the warranty
+            warrantyCostPercentage: metafield(namespace: "custom", key: "addwarrenty") {
+              type
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+  cartTransform {
+    # Access the variant ID that represents the warranty product
+    warrantyVariantID: metafield(namespace: "custom", key: "addwarrenty") {
+      value
+    }
+  }
+  presentmentCurrencyRate # Decimal conversion rate between shop currency and cart currency
+}

@@ -1,0 +1,21 @@
+query RunInput {
+  cart {
+    deliveryGroups {
+      deliveryAddress {
+        provinceCode
+        zip
+      }
+      deliveryOptions {
+        handle
+        title
+      }
+    }
+    attribute(key: "user_pincode") {
+      key
+      value
+    }
+    lines {
+      quantity
+    }
+  }
+}
